@@ -1,4 +1,4 @@
-name: Generate repo galaxy and projects
+name: Generate profile cards
 
 on:
   schedule:
@@ -25,6 +25,12 @@ jobs:
 
       - name: Draw the projects list
         run: python3 scripts/projects.py
+        env:
+          GITHUB_USER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Draw the language stack
+        run: python3 scripts/stack.py
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
