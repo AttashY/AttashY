@@ -4,7 +4,7 @@
 
 <!-- Typing animation. Each line is separated by ; and spaces are written as + -->
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=7AA2F7&center=true&vCenter=true&width=550&lines=CS+student+%40+University+of+Calgary;Aspiring+AI%2FML+Engineer;Building+a+Jarvis-style+AI+assistant" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=7AA2F7&center=true&vCenter=true&width=550&lines=CS+student+%40+University+of+Calgary;Aspiring+AI%2FML+Engineer;Shipping+projects+end-to-end" />
 </p>
 
 <!-- ===================== ABOUT ME ===================== -->
@@ -15,7 +15,7 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
 - 🌱 Always shipping something — a client site, a portfolio, a hackathon prototype, coursework, or a robotics side project
 - 🎓 Computer Science student in Calgary
 - 🤖 Working toward becoming an AI/ML engineer
-- 🔁 while (alive) { learn(); build(); ship(); }
+- 🧮 Currently proving things by induction for fun (and for CPSC 251)
 
 <!-- ===================== GALAXY ===================== -->
 <!-- Drawn by scripts/galaxy.py, run daily by .github/workflows/galaxy.yml -->
@@ -46,6 +46,15 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
   <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/stack.svg" />
 </p>
 
+<!-- ===================== HIGHLIGHTS + ACTIVITY ===================== -->
+<!-- Both drawn by scripts/stats.py. The activity graph sweeps in each time the page loads. -->
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/highlights.svg" />
+</p>
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/activity.svg" />
+</p>
+
 <!-- ===================== TECH STACK ===================== -->
 ## 🛠️ Languages & Tools
 
@@ -61,7 +70,6 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
 <!-- LINKS:START -->
 <p align="center">
   <a href="https://github.com/AttashY"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/0-github.svg" alt="GitHub" /></a>
-  <a href="https://www.linkedin.com/in/attash-yusofi/"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/1-linkedin.svg" alt="LinkedIn" /></a>
 </p>
 <!-- LINKS:END -->
 
