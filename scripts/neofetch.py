@@ -23,7 +23,7 @@ from snake import fetch_calendar
 from stats import fetch_all_days, streaks
 
 # ---------- settings you can play with ----------
-ROLE = "CS student · aspiring AI/ML engineer"
+ROLE = "CS student @ UCalgary · aspiring AI/ML engineer"
 ART_COLS = 62                   # how wide the ASCII picture is, in characters
 RAMP = " .,:;-=+*#%$@"          # characters from darkest to brightest
 ART_COLOR = "#3fb950"
