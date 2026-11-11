@@ -1,10 +1,11 @@
 """
-Profile Signal + Streak generator.
+Profile stats generator.
 
-Draws two cards that sit side by side:
-  - signal.svg: Stars, Contributions, Repos and Followers in four tiles
-  - streak.svg: all-time contributions, your current streak, and your
-    longest streak ever
+Draws four cards from the same GitHub data:
+  - signal.svg:     Stars, Contributions, Repos and Followers in four tiles
+  - streak.svg:     all-time contributions, current and longest streak
+  - highlights.svg: Open Source / Impact / Community tiles
+  - activity.svg:   your contribution graph, revealed by a scanning line
 
 Runs inside the same GitHub Action as the other cards.
 """
@@ -17,7 +18,7 @@ from datetime import date, datetime, timedelta, timezone
 
 from galaxy import USER, fetch_repos     # reuse code from the other scripts
 from projects import aurora, get_json
-from snake import fetch_calendar
+from snake import LEVEL_COLORS, TODAY_COLOR, fetch_calendar
 
 # ---------- settings you can play with ----------
 W, H = 400, 180                 # each card's size
@@ -221,21 +222,169 @@ def streak_svg(total, since, current, longest, today):
     ])
 
 
+# ---------- card 3: Highlights ----------
+
+def plural(n, word, words):
+    return f"{n:,} {word if n == 1 else words}"
+
+
+def highlights_svg(public_repos, stars, followers):
+    width, height = 800, 146
+    tiles = [
+        ("Open Source", plural(public_repos, "public repository", "public repositories"), "#4aa3ff"),
+        ("Impact", plural(stars, "star earned", "stars earned"), "#4ade80"),
+        ("Community", plural(followers, "follower", "followers"), "#b77bff"),
+    ]
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        f"""<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0b1226"/><stop offset="1" stop-color="#060a16"/>
+  </linearGradient>
+  <clipPath id="frame"><rect width="{width}" height="{height}" rx="16"/></clipPath>
+</defs>
+<style>
+  text {{ font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; }}
+  .eyebrow {{ font-size: 10px; letter-spacing: 3px; fill: #8a93b8; font-weight: 700; }}
+  .head {{ font-size: 13px; font-weight: 700; fill: #ffffff; }}
+  .sub {{ font-size: 11px; fill: #a9b1d6; }}
+  .tile {{ fill: #070b18; fill-opacity: 0.75; stroke: #2f3a6b; }}
+</style>""",
+        '<g clip-path="url(#frame)">',
+        f'<rect width="{width}" height="{height}" fill="url(#bg)"/>',
+    ]
+    parts += aurora(height, width)
+    parts += [
+        '</g>',
+        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="16" fill="none" stroke="#2a3566"/>',
+        '<text x="32" y="38" class="eyebrow">HIGHLIGHTS</text>',
+    ]
+    tile_w = (width - 64 - 2 * 16) / 3
+    for i, (head, sub, color) in enumerate(tiles):
+        x = 32 + i * (tile_w + 16)
+        delay = 0.15 + i * 0.15               # each tile arrives a little after the last
+        timing = f'dur="{delay + 0.6:.2f}s" keyTimes="0;{delay / (delay + 0.6):.3f};1" fill="freeze"'
+        parts += [
+            '<g>',
+            f'<animate attributeName="opacity" values="0;0;1" {timing}/>',
+            f'<animateTransform attributeName="transform" type="translate" values="0 10;0 10;0 0" {timing} '
+            f'calcMode="spline" keySplines="0 0 1 1;0.2 0.8 0.2 1"/>',
+            f'<rect x="{x:.1f}" y="54" width="{tile_w:.1f}" height="66" rx="10" class="tile"/>',
+            f'<rect x="{x + 1:.1f}" y="62" width="3" height="50" rx="1.5" fill="{color}"/>',
+            f'<text x="{x + 18:.1f}" y="82" class="head">{head}</text>',
+            f'<text x="{x + 18:.1f}" y="101" class="sub">{sub}</text>',
+            '</g>',
+        ]
+    parts.append("</svg>")
+    return "\n".join(parts)
+
+
+# ---------- card 4: Contribution Activity ----------
+
+def activity_svg(calendar):
+    """Your contribution graph. When the image loads, a glowing line sweeps
+    left to right and each column fades in as the line passes it."""
+    width = 800
+    cell, pitch = 10.5, 13.2
+    gx, gy = 50, 102
+    weeks = calendar["weeks"]
+    columns = max(len(weeks), 1)
+    grid_w = columns * pitch
+    height = gy + 7 * pitch + 42
+    sweep = 1.8                                  # seconds for the line to cross
+    total = calendar["totalContributions"]
+    today = weeks[-1]["contributionDays"][-1]["date"] if weeks else None
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        f"""<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0b1226"/><stop offset="1" stop-color="#060a16"/>
+  </linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#5ab4ff" stop-opacity="0"/>
+    <stop offset="0.8" stop-color="#5ab4ff" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#5ab4ff" stop-opacity="0"/>
+  </linearGradient>
+  <clipPath id="frame"><rect width="{width}" height="{height}" rx="16"/></clipPath>
+</defs>
+<style>
+  text {{ font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; }}
+  .title {{ font-size: 20px; font-weight: 800; fill: #ffffff; }}
+  .sub {{ font-size: 11.5px; font-weight: 600; fill: #a9b1d6; }}
+  .legend {{ font-size: 10px; fill: #a9b1d6; }}
+  .panel {{ fill: #070b18; fill-opacity: 0.72; stroke: #3d4785; }}
+  @keyframes glow {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.55; }} }}
+  .today {{ animation: glow 2s ease-in-out infinite; }}
+</style>""",
+        '<g clip-path="url(#frame)">',
+        f'<rect width="{width}" height="{height}" fill="url(#bg)"/>',
+    ]
+    parts += aurora(height, width)
+    parts += [
+        '</g>',
+        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="16" fill="none" stroke="#2a3566"/>',
+        f'<rect x="24" y="22" width="{width - 48}" height="{height - 44}" rx="14" class="panel"/>',
+        '<text x="48" y="62" class="title">Contribution Activity</text>',
+        f'<text x="49" y="82" class="sub">{total:,} contribution{"" if total == 1 else "s"} in the last year</text>',
+    ]
+    # the Less ■■■■■ More legend
+    lx = width - 48 - 5 * 13 - 60
+    parts.append(f'<text x="{lx}" y="62" class="legend">Less</text>')
+    for i, color in enumerate(LEVEL_COLORS.values()):
+        parts.append(f'<rect x="{lx + 28 + i * 13}" y="53" width="10" height="10" rx="2.5" fill="{color}"/>')
+    parts.append(f'<text x="{lx + 28 + 5 * 13 + 4}" y="62" class="legend">More</text>')
+
+    # the squares, one column (week) at a time
+    for col, week in enumerate(weeks):
+        arrive = (col + 0.5) / columns * sweep      # when the line reaches this column
+        parts.append(f'<g opacity="1"><animate attributeName="opacity" values="0;0;1" '
+                     f'keyTimes="0;{arrive / (sweep + 0.3):.3f};1" dur="{sweep + 0.3:.2f}s" fill="freeze"/>')
+        for day in week["contributionDays"]:
+            x, y = gx + col * pitch, gy + day["weekday"] * pitch
+            if day["date"] == today:
+                parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="2.5" '
+                             f'fill="{TODAY_COLOR}" class="today"/>')
+            else:
+                parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="2.5" '
+                             f'fill="{LEVEL_COLORS[day["contributionLevel"]]}"/>')
+        parts.append('</g>')
+
+    # the scanning line: a soft glow trailing a thin bright line
+    beam_h = 7 * pitch + 6
+    parts.append(
+        f'<g opacity="0">'
+        f'<animate attributeName="opacity" values="1;1;0" keyTimes="0;0.85;1" dur="{sweep + 0.3:.2f}s" fill="freeze"/>'
+        f'<animateTransform attributeName="transform" type="translate" from="0 0" to="{grid_w:.1f} 0" '
+        f'dur="{sweep:.2f}s" fill="freeze"/>'
+        f'<rect x="{gx - 34}" y="{gy - 5}" width="34" height="{beam_h:.1f}" fill="url(#beam)"/>'
+        f'<rect x="{gx - 2}" y="{gy - 5}" width="2" height="{beam_h:.1f}" rx="1" fill="#7cc4ff"/>'
+        f'</g>')
+    parts.append("</svg>")
+    return "\n".join(parts)
+
+
 if __name__ == "__main__":
     os.makedirs("dist", exist_ok=True)
     now = datetime.now(timezone.utc)
     user = get_json(f"https://api.github.com/users/{USER}")
     created = datetime.fromisoformat(user["created_at"].replace("Z", "+00:00"))
     repos = fetch_repos()
+    calendar = fetch_calendar()                      # the past year, day by day
+    stars = sum(r["stargazers_count"] for r in repos)
     stats = {
-        "Stars": sum(r["stargazers_count"] for r in repos),
-        "Contributions": fetch_calendar()["totalContributions"],   # past year
+        "Stars": stars,
+        "Contributions": calendar["totalContributions"],
         "Repos": len(repos),
         "Followers": user["followers"],
     }
     total, current, longest = streaks(fetch_all_days(created, now))
-    with open("dist/signal.svg", "w", encoding="utf-8") as f:
-        f.write(signal_svg(stats))
-    with open("dist/streak.svg", "w", encoding="utf-8") as f:
-        f.write(streak_svg(total, created.date(), current, longest, now.date()))
-    print("Wrote dist/signal.svg and dist/streak.svg")
+    cards = {
+        "signal.svg": signal_svg(stats),
+        "streak.svg": streak_svg(total, created.date(), current, longest, now.date()),
+        "highlights.svg": highlights_svg(user["public_repos"], stars, user["followers"]),
+        "activity.svg": activity_svg(calendar),
+    }
+    for name, svg in cards.items():
+        with open(f"dist/{name}", "w", encoding="utf-8") as f:
+            f.write(svg)
+    print("Wrote", ", ".join(cards))
