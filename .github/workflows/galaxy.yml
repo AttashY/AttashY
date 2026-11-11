@@ -47,6 +47,15 @@ jobs:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install Pillow (used to turn your profile picture into ASCII)
+        run: pip install pillow
+
+      - name: Draw the neofetch header
+        run: python3 scripts/neofetch.py
+        env:
+          GITHUB_USER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Make the link chips and update the README
         run: python3 scripts/links.py
         env:
