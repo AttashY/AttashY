@@ -110,7 +110,13 @@ def languages_of(repo):
     """Bytes of code per language, e.g. {"Python": 9120, "HTML": 340}."""
     if "languages" in repo:                 # contributed repos already include them
         return repo["languages"]
-    return get_json(repo["languages_url"])
+    languages = get_json(repo["languages_url"])
+    if not languages and repo.get("fork"):
+        # GitHub doesn't always analyze forks, so borrow the original repo's languages
+        parent = get_json(repo["url"]).get("parent")
+        if parent:
+            languages = get_json(parent["languages_url"])
+    return languages
 
 
 def to_project(repo):
