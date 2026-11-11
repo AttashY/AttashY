@@ -1,4 +1,4 @@
-name: Generate repo galaxy
+name: Generate repo galaxy and projects
 
 on:
   schedule:
@@ -23,7 +23,13 @@ jobs:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push galaxy.svg to the galaxy-output branch
+      - name: Draw the projects list
+        run: python3 scripts/projects.py
+        env:
+          GITHUB_USER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push the cards to the galaxy-output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: galaxy-output
