@@ -12,8 +12,8 @@ dist/stack.svg, which your README displays.
 import html
 import os
 
-from galaxy import color_for, fetch_repos          # reuse code from galaxy.py
-from projects import aurora, get_json              # and from projects.py
+from galaxy import color_for                        # reuse code from galaxy.py
+from projects import all_repos, aurora, languages_of   # and from projects.py
 
 # ---------- settings you can play with ----------
 TOP_LANGUAGES = 5      # how many rows to show
@@ -105,7 +105,8 @@ def build_svg(stack):
 
 if __name__ == "__main__":
     os.makedirs("dist", exist_ok=True)
-    language_maps = [get_json(r["languages_url"]) for r in fetch_repos()]
+    # your repos + ones you've contributed to, not counting the profile repo's scripts
+    language_maps = [languages_of(r) for r in all_repos()]
     with open("dist/stack.svg", "w", encoding="utf-8") as f:
         f.write(build_svg(repo_weighted(language_maps)))
     print("Wrote dist/stack.svg")
