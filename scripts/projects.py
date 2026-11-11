@@ -176,7 +176,7 @@ def empty_card(y):
     ]
 
 
-def aurora(height):
+def aurora(height, width=800):
     """Big soft colored glows drifting slowly behind everything.
 
     Each glow is an oval filled with a radial gradient: full color in the
@@ -190,7 +190,9 @@ def aurora(height):
         (720, height - 50, 320, 220, "#e5484d", 24, "0 0; -40 -30; 10 -10; 0 0"),
     ]
     out = []
+    scale = width / 800                     # squeeze the glows to fit narrower cards
     for i, (x, y, w, h, color, seconds, path) in enumerate(blobs):
+        x, w = x * scale, w * max(scale, 0.6)
         out.append(
             f'<radialGradient id="glow{i}"><stop offset="0" stop-color="{color}" stop-opacity="0.32"/>'
             f'<stop offset="1" stop-color="{color}" stop-opacity="0"/></radialGradient>')
