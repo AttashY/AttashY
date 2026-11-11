@@ -1,10 +1,9 @@
 """
 Profile stats generator.
 
-Draws four cards from the same GitHub data:
+Draws three cards from the same GitHub data:
   - signal.svg:     Stars, Contributions, Repos and Followers in four tiles
   - streak.svg:     all-time contributions, current and longest streak
-  - highlights.svg: Open Source / Impact / Community tiles
   - activity.svg:   your contribution graph, revealed by a scanning line
 
 Runs inside the same GitHub Action as the other cards.
@@ -222,64 +221,7 @@ def streak_svg(total, since, current, longest, today):
     ])
 
 
-# ---------- card 3: Highlights ----------
-
-def plural(n, word, words):
-    return f"{n:,} {word if n == 1 else words}"
-
-
-def highlights_svg(public_repos, stars, followers):
-    width, height = 800, 146
-    tiles = [
-        ("Open Source", plural(public_repos, "public repository", "public repositories"), "#4aa3ff"),
-        ("Impact", plural(stars, "star earned", "stars earned"), "#4ade80"),
-        ("Community", plural(followers, "follower", "followers"), "#b77bff"),
-    ]
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        f"""<defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#0b1226"/><stop offset="1" stop-color="#060a16"/>
-  </linearGradient>
-  <clipPath id="frame"><rect width="{width}" height="{height}" rx="16"/></clipPath>
-</defs>
-<style>
-  text {{ font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; }}
-  .eyebrow {{ font-size: 10px; letter-spacing: 3px; fill: #8a93b8; font-weight: 700; }}
-  .head {{ font-size: 13px; font-weight: 700; fill: #ffffff; }}
-  .sub {{ font-size: 11px; fill: #a9b1d6; }}
-  .tile {{ fill: #070b18; fill-opacity: 0.75; stroke: #2f3a6b; }}
-</style>""",
-        '<g clip-path="url(#frame)">',
-        f'<rect width="{width}" height="{height}" fill="url(#bg)"/>',
-    ]
-    parts += aurora(height, width)
-    parts += [
-        '</g>',
-        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="16" fill="none" stroke="#2a3566"/>',
-        '<text x="32" y="38" class="eyebrow">HIGHLIGHTS</text>',
-    ]
-    tile_w = (width - 64 - 2 * 16) / 3
-    for i, (head, sub, color) in enumerate(tiles):
-        x = 32 + i * (tile_w + 16)
-        delay = 0.15 + i * 0.15               # each tile arrives a little after the last
-        timing = f'dur="{delay + 0.6:.2f}s" keyTimes="0;{delay / (delay + 0.6):.3f};1" fill="freeze"'
-        parts += [
-            '<g>',
-            f'<animate attributeName="opacity" values="0;0;1" {timing}/>',
-            f'<animateTransform attributeName="transform" type="translate" values="0 10;0 10;0 0" {timing} '
-            f'calcMode="spline" keySplines="0 0 1 1;0.2 0.8 0.2 1"/>',
-            f'<rect x="{x:.1f}" y="54" width="{tile_w:.1f}" height="66" rx="10" class="tile"/>',
-            f'<rect x="{x + 1:.1f}" y="62" width="3" height="50" rx="1.5" fill="{color}"/>',
-            f'<text x="{x + 18:.1f}" y="82" class="head">{head}</text>',
-            f'<text x="{x + 18:.1f}" y="101" class="sub">{sub}</text>',
-            '</g>',
-        ]
-    parts.append("</svg>")
-    return "\n".join(parts)
-
-
-# ---------- card 4: Contribution Activity ----------
+# ---------- card 3: Contribution Activity ----------
 
 def activity_svg(calendar):
     """Your contribution graph. When the image loads, a glowing line sweeps
@@ -381,7 +323,6 @@ if __name__ == "__main__":
     cards = {
         "signal.svg": signal_svg(stats),
         "streak.svg": streak_svg(total, created.date(), current, longest, now.date()),
-        "highlights.svg": highlights_svg(user["public_repos"], stars, user["followers"]),
         "activity.svg": activity_svg(calendar),
     }
     for name, svg in cards.items():
