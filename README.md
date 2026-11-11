@@ -39,17 +39,10 @@
 <!-- ===================== PROJECTS ===================== -->
 ## 🚀 Projects
 
-<!-- Once a repo exists, uncomment the line below and change repo= to its exact name.
-     Copy the <a> line again for each extra project. -->
-<!--
+<!-- Drawn by scripts/projects.py. Pick which repos show with FEATURED in that file. -->
 <p align="center">
-  <a href="https://github.com/AttashY/jarvis">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=AttashY&repo=jarvis&theme=tokyonight&hide_border=true" />
-  </a>
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/projects.svg" />
 </p>
--->
-
-**🤖 Jarvis**: a personal AI assistant with voice and text chat, growing toward controlling apps, files and smart-home devices. *(Coming soon: currently in the planning stage)*
 
 <!-- ===================== TECH STACK ===================== -->
 ## 🛠️ Languages & Tools
