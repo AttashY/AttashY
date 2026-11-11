@@ -25,15 +25,10 @@
 <!-- ===================== STATS ===================== -->
 ## 📊 GitHub Stats
 
-<!-- Two cards side by side. They use the same theme (tokyonight) so they match. -->
+<!-- Both drawn by scripts/stats.py -->
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=AttashY&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
-  <img height="165" src="https://streak-stats.demolab.com?user=AttashY&theme=tokyonight&hide_border=true" />
-</p>
-
-<!-- Contribution activity line graph -->
-<p align="center">
-  <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=AttashY&theme=tokyo-night&hide_border=true&area=true" />
+  <img width="49%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/signal.svg" />
+  <img width="49%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/streak.svg" />
 </p>
 
 <!-- ===================== PROJECTS ===================== -->
