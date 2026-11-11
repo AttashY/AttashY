@@ -78,15 +78,22 @@ def color_for(language):
 
 
 def language_arms(repos):
-    """Pick which languages get an arm, and what share of repos each has.
+    """Pick which languages get an arm, and how big a share each has.
 
+    Every repo gets an equal vote, split between the languages inside it
+    (a repo that's 80% TypeScript and 20% CSS gives 0.8 to one, 0.2 to the
+    other). The profile repo is left out: it only holds these scripts.
     Returns a list of (language, color, share), biggest language first.
-    With no repos yet, you get two plain arms so the galaxy isn't empty.
+    With no languages found yet, you get two plain arms.
     """
     counts = {}
     for r in repos:
-        if r["language"]:
-            counts[r["language"]] = counts.get(r["language"], 0) + 1
+        if r["name"].lower() == USER.lower():
+            continue
+        langs = r.get("languages") or ({r["language"]: 1} if r["language"] else {})
+        size = sum(langs.values())
+        for lang, nbytes in langs.items():
+            counts[lang] = counts.get(lang, 0) + nbytes / size
     total = sum(counts.values())
     if total == 0:
         return [(None, "#7c83ff", 0.5), (None, "#7c83ff", 0.5)]
@@ -256,7 +263,8 @@ def legend(repos, arms):
     lines = [
         '<text x="32" y="48" class="eyebrow">REPO GALAXY</text>',
         f'<text x="32" y="82" class="title">@{html.escape(USER)}</text>',
-        f'<text x="32" y="106" class="stat">{total_stars} stars · {len(repos)} repositories</text>',
+        f'<text x="32" y="106" class="stat">{total_stars} star{"" if total_stars == 1 else "s"} · '
+        f'{len(repos)} repositor{"y" if len(repos) == 1 else "ies"}</text>',
         '<text x="32" y="128" class="hint">Each star is a repository, sized by its stars.</text>',
         '<text x="32" y="222" class="eyebrow">ARMS</text>',
     ]
@@ -326,9 +334,23 @@ def build_svg(repos):
     return "\n".join(parts)
 
 
+def add_languages(repos):
+    """Look up the languages inside each repo.
+
+    GitHub sometimes leaves a repo's main language blank (often for forks),
+    which left it with no arm. Here we fill it in from the repo's actual code.
+    """
+    from projects import languages_of   # imported here to avoid a loop: projects imports galaxy
+    for r in repos:
+        r["languages"] = languages_of(r)
+        if not r["language"] and r["languages"]:
+            r["language"] = max(r["languages"], key=r["languages"].get)
+    return repos
+
+
 if __name__ == "__main__":
     os.makedirs("dist", exist_ok=True)
-    svg = build_svg(fetch_repos())
+    svg = build_svg(add_languages(fetch_repos()))
     with open("dist/galaxy.svg", "w", encoding="utf-8") as f:
         f.write(svg)
     print("Wrote dist/galaxy.svg")
