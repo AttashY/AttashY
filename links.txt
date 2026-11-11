@@ -7,5 +7,5 @@
 # Lines starting with # are ignored. Remove the # to turn an example on.
 
 https://github.com/AttashY
-# https://www.linkedin.com/in/your-name
-# mailto:you@example.com
+https://www.linkedin.com/in/attash-yusofi/
+mailto:attashyusofi1@gmail.com
