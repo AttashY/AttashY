@@ -10,11 +10,12 @@
 <!-- ===================== ABOUT ME ===================== -->
 ## 📌 About Me
 
+I like owning projects end-to-end: architecture, implementation, deployment, documentation, and the user experience.
+
+- 🌱 Always shipping something — a client site, a portfolio, a hackathon prototype, coursework, or a robotics side project
 - 🎓 Computer Science student in Calgary
 - 🤖 Working toward becoming an AI/ML engineer
-- 🛠️ Currently building **Jarvis**, a voice + text personal AI assistant
-- 🌱 Learning: Python, machine learning, and how real AI systems are built
-- ⚽ Off the keyboard: soccer
+- 🔁 while (alive) { learn(); build(); ship(); }
 
 <!-- ===================== GALAXY ===================== -->
 <!-- Drawn by scripts/galaxy.py, run daily by .github/workflows/galaxy.yml -->
