@@ -41,6 +41,12 @@ jobs:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Draw the profile signal and streak cards
+        run: python3 scripts/stats.py
+        env:
+          GITHUB_USER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Push the cards to the galaxy-output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
