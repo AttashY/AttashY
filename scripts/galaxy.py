@@ -36,7 +36,7 @@ DRIFT_SECONDS = (10, 18)          # how long one star takes to drift (min, max)
 # color made from its name, so it's always the same.
 LANG_COLORS = {
     "JavaScript": "#f7e463", "TypeScript": "#4aa3ff", "Python": "#5b9cf0",
-    "Jupyter Notebook": "#f59a45", "HTML": "#ff6f4d", "CSS": "#a36bff",
+    "Jupyter Notebook": "#ff7eb6", "HTML": "#ff6f4d", "CSS": "#a36bff",
     "SCSS": "#e66aa8", "Java": "#f0a33a", "Kotlin": "#b38cff",
     "C": "#a8b3c7", "C++": "#ff5c8a", "C#": "#4fd16a", "Go": "#3fd0e8",
     "Rust": "#e8a07a", "Ruby": "#ff4d5e", "PHP": "#8f97e0", "Swift": "#ff7a45",
