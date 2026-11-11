@@ -68,12 +68,9 @@
 </p>
 
 <!-- ===================== SNAKE ===================== -->
-<!-- Built by the GitHub Action in .github/workflows/snake.yml. Shows up after the action runs once. -->
+<!-- Drawn by scripts/snake.py from your contribution graph -->
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AttashY/AttashY/output/github-snake-dark.svg" />
-    <img alt="snake eating my contributions" src="https://raw.githubusercontent.com/AttashY/AttashY/output/github-snake.svg" />
-  </picture>
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/snake.svg" />
 </p>
 
 <!-- Footer wave (the same banner, flipped) -->
