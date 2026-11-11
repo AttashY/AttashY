@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 
 from PIL import Image, ImageOps
 
-from galaxy import USER, fetch_repos, language_arms
+from galaxy import USER, add_languages, fetch_repos, language_arms
 from projects import get_json
 from snake import fetch_calendar
 from stats import fetch_all_days, streaks
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     os.makedirs("dist", exist_ok=True)
     now = datetime.now(timezone.utc)
     user = get_json(f"https://api.github.com/users/{USER}")
-    repos = fetch_repos()
+    repos = add_languages(fetch_repos())
     calendar = fetch_calendar()
     created = datetime.fromisoformat(user["created_at"].replace("Z", "+00:00"))
     _, (current, _), (longest, _) = streaks(fetch_all_days(created, now))
