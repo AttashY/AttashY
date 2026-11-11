@@ -1,1 +1,11 @@
+# Your "Connect with me" links. One link per line.
+# Edit this file on GitHub, commit, and your profile updates by itself.
+#
+# Want a custom name on the chip? Put it before the link with a | like this:
+#   Portfolio | https://attash.dev
+#
+# Lines starting with # are ignored. Remove the # to turn an example on.
 
+https://github.com/AttashY
+# https://www.linkedin.com/in/your-name
+# mailto:you@example.com
