@@ -1,10 +1,7 @@
 <!-- ===================== HEADER ===================== -->
-<!-- A wavy gradient banner. Change text=, color=, height= in the URL to restyle it. -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=Hey,%20I'm%20Attash%20Yusofi&fontSize=40&fontColor=ffffff&animation=fadeIn" width="100%" />
-
-<!-- Typing animation. Each line is separated by ; and spaces are written as + -->
+<!-- Drawn by scripts/neofetch.py: your profile picture as ASCII art plus live stats -->
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=7AA2F7&center=true&vCenter=true&width=550&lines=CS+student+%40+University+of+Calgary;Aspiring+AI%2FML+Engineer;Shipping+projects+end-to-end" />
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/neofetch.svg" alt="Attash Yusofi" />
 </p>
 
 <!-- ===================== ABOUT ME ===================== -->
@@ -67,7 +64,6 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
 <!-- LINKS:START -->
 <p align="center">
   <a href="https://github.com/AttashY"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/0-github.svg" alt="GitHub" /></a>
-  <a href="https://www.linkedin.com/in/attash-yusofi/"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/1-linkedin.svg" alt="LinkedIn" /></a>
 </p>
 <!-- LINKS:END -->
 
@@ -76,6 +72,3 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
 <p align="center">
   <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/snake.svg" />
 </p>
-
-<!-- Footer wave (the same banner, flipped) -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=120&section=footer" width="100%" />
