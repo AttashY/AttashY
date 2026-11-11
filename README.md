@@ -44,6 +44,12 @@
   <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/projects.svg" />
 </p>
 
+<!-- ===================== LANGUAGE STACK ===================== -->
+<!-- Drawn by scripts/stack.py from the code in your public repos -->
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/stack.svg" />
+</p>
+
 <!-- ===================== TECH STACK ===================== -->
 ## 🛠️ Languages & Tools
 
