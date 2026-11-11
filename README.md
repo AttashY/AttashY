@@ -16,6 +16,12 @@
 - 🌱 Learning: Python, machine learning, and how real AI systems are built
 - ⚽ Off the keyboard: soccer
 
+<!-- ===================== GALAXY ===================== -->
+<!-- Drawn by scripts/galaxy.py, run daily by .github/workflows/galaxy.yml -->
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/galaxy.svg" />
+</p>
+
 <!-- ===================== STATS ===================== -->
 ## 📊 GitHub Stats
 
@@ -43,14 +49,14 @@
 </p>
 -->
 
-**🤖 Jarvis**: a personal AI assistant with voice and text chat, growing toward controlling apps, files and smart-home devices. *(In progress)*
+**🤖 Jarvis**: a personal AI assistant with voice and text chat, growing toward controlling apps, files and smart-home devices. *(Coming soon: currently in the planning stage)*
 
 <!-- ===================== TECH STACK ===================== -->
 ## 🛠️ Languages & Tools
 
 <!-- Edit the list after i= to match what you actually use. Full icon list: https://skillicons.dev -->
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,js,html,css,git,github,vscode&perline=7" />
+  <img src="https://skillicons.dev/icons?i=python,java,cpp,js,html,css,git,github,vscode&perline=9" />
 </p>
 
 <!-- ===================== CONNECT ===================== -->
