@@ -41,7 +41,7 @@ jobs:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Draw the signal, streak, highlights and activity cards
+      - name: Draw the signal, streak and activity cards
         run: python3 scripts/stats.py
         env:
           GITHUB_USER: ${{ github.repository_owner }}
