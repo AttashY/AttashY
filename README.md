@@ -46,11 +46,8 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
   <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/stack.svg" />
 </p>
 
-<!-- ===================== HIGHLIGHTS + ACTIVITY ===================== -->
-<!-- Both drawn by scripts/stats.py. The activity graph sweeps in each time the page loads. -->
-<p align="center">
-  <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/highlights.svg" />
-</p>
+<!-- ===================== CONTRIBUTION ACTIVITY ===================== -->
+<!-- Drawn by scripts/stats.py. Sweeps in each time the page loads. -->
 <p align="center">
   <img width="100%" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/activity.svg" />
 </p>
@@ -70,7 +67,6 @@ I like owning projects end-to-end: architecture, implementation, deployment, doc
 <!-- LINKS:START -->
 <p align="center">
   <a href="https://github.com/AttashY"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/0-github.svg" alt="GitHub" /></a>
-  <a href="https://www.linkedin.com/in/attash-yusofi/"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/1-linkedin.svg" alt="LinkedIn" /></a>
 </p>
 <!-- LINKS:END -->
 
