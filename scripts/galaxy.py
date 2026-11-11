@@ -30,6 +30,7 @@ DRIFT_STARS = 200                 # drifting stars, shared between the arms
 TILT = 0.9                        # 1 = seen from above, smaller = more tilted
 TURN = 200                        # rotates the whole galaxy (degrees)
 DRIFT_SECONDS = (10, 18)          # how long one star takes to drift (min, max)
+INCLUDE_FORKS = True              # count repos you forked (e.g. a team's hackathon repo)
 
 # Brightened versions of GitHub's language colors (the originals are hard
 # to see on a dark background). Any language not listed gets its own
@@ -47,7 +48,11 @@ NO_LANGUAGE = "#c0caf5"           # repos GitHub couldn't detect a language for
 
 
 def fetch_repos():
-    """Ask the GitHub API for this user's public repos (skipping forks)."""
+    """Ask the GitHub API for this user's public repos.
+
+    Forks are included unless INCLUDE_FORKS is False. Private repos can
+    never show up: the workflow's token is only allowed to see public ones.
+    """
     url = f"https://api.github.com/users/{USER}/repos?per_page=100&type=owner"
     req = urllib.request.Request(url, headers={
         "Accept": "application/vnd.github+json",
@@ -58,7 +63,7 @@ def fetch_repos():
         req.add_header("Authorization", f"Bearer {token}")
     with urllib.request.urlopen(req) as response:
         repos = json.load(response)
-    return [r for r in repos if not r["fork"]]
+    return [r for r in repos if INCLUDE_FORKS or not r["fork"]]
 
 
 def color_for(language):
