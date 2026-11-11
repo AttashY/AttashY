@@ -20,7 +20,8 @@ from datetime import datetime, timezone
 from galaxy import USER, color_for, fetch_repos   # reuse code from galaxy.py
 
 # ---------- settings you can play with ----------
-FEATURED = []        # repo names to show, in order, e.g. ["jarvis", "portfolio"].
+FEATURED = []        # repos to show, in order. Your own: "portfolio". Someone else's or
+                     # an organization's: "teammate/hackathon-app".
                      # Leave empty to show your most recently updated repos.
 MAX_PROJECTS = 4     # how many cards (2 per row)
 WIDTH = 800
@@ -40,25 +41,88 @@ def get_json(url):
         return json.load(response)
 
 
+CONTRIBUTED_QUERY = """
+query($login: String!) {
+  user(login: $login) {
+    repositoriesContributedTo(first: 30, privacy: PUBLIC, includeUserRepositories: false,
+        contributionTypes: [COMMIT, PULL_REQUEST, REPOSITORY],
+        orderBy: {field: PUSHED_AT, direction: DESC}) {
+      nodes {
+        name nameWithOwner description stargazerCount pushedAt
+        primaryLanguage { name }
+        languages(first: 10, orderBy: {field: SIZE, direction: DESC}) { edges { size node { name } } }
+      }
+    }
+  }
+}"""
+
+
+def fetch_contributed_repos():
+    """Public repos owned by someone else (a teammate, an organization) that
+    you've committed to in the last year, like a team hackathon project.
+
+    These come from GitHub's GraphQL API and are reshaped to look like the
+    repos from fetch_repos(), so the rest of the code treats them the same.
+    """
+    body = json.dumps({"query": CONTRIBUTED_QUERY, "variables": {"login": USER}}).encode()
+    req = urllib.request.Request("https://api.github.com/graphql", data=body, headers={
+        "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+        "Content-Type": "application/json", "User-Agent": "projects-list"})
+    with urllib.request.urlopen(req) as response:
+        nodes = json.load(response)["data"]["user"]["repositoriesContributedTo"]["nodes"]
+    return [{
+        "name": n["name"],
+        "full_name": n["nameWithOwner"],
+        "description": n["description"],
+        "stargazers_count": n["stargazerCount"],
+        "language": (n["primaryLanguage"] or {}).get("name"),
+        "languages": {e["node"]["name"]: e["size"] for e in n["languages"]["edges"]},
+        "pushed_at": n["pushedAt"],
+    } for n in nodes]
+
+
+def all_repos():
+    """Your own public repos plus ones you've contributed to, without the
+    profile repo (it only holds these scripts, not a project)."""
+    found = {}
+    for repo in fetch_repos() + fetch_contributed_repos():
+        full_name = repo.get("full_name") or f"{USER}/{repo['name']}"
+        if repo["name"].lower() != USER.lower():
+            found[full_name.lower()] = dict(repo, full_name=full_name)
+    return list(found.values())
+
+
 def pick_projects(repos):
     """Choose which repos get a card."""
-    repos = [r for r in repos if r["name"].lower() != USER.lower()]  # skip the profile repo
     if FEATURED:
-        by_name = {r["name"].lower(): r for r in repos}
+        by_name = {}
+        for r in repos:
+            by_name[r["full_name"].lower()] = r
+            if r["full_name"].lower().startswith(USER.lower() + "/"):
+                by_name[r["name"].lower()] = r      # your own repos work without "AttashY/"
         chosen = [by_name[n.lower()] for n in FEATURED if n.lower() in by_name]
     else:
         chosen = sorted(repos, key=lambda r: r["pushed_at"], reverse=True)
     return chosen[:MAX_PROJECTS]
 
 
+def languages_of(repo):
+    """Bytes of code per language, e.g. {"Python": 9120, "HTML": 340}."""
+    if "languages" in repo:                 # contributed repos already include them
+        return repo["languages"]
+    return get_json(repo["languages_url"])
+
+
 def to_project(repo):
-    """Keep just what a card needs. Also asks GitHub which languages are in the repo."""
+    """Keep just what a card needs."""
+    own = repo["full_name"].lower().startswith(USER.lower() + "/")
     return {
         "name": repo["name"],
+        "tab": repo["name"] if own else repo["full_name"],   # show whose repo it is
         "description": repo["description"],
         "stars": repo["stargazers_count"],
         "language": repo["language"],
-        "languages": get_json(repo["languages_url"]),   # e.g. {"Python": 9120, "HTML": 340}
+        "languages": languages_of(repo),
         "pushed_at": repo["pushed_at"],
     }
 
@@ -134,7 +198,7 @@ def card(x, y, p, now):
         f'<rect width="{CARD_W}" height="{CARD_H}" rx="10" class="card"/>',
         # header bar: small bullet, repo name, status dot
         f'<rect x="12" y="11" width="3" height="3" fill="#7aa2f7"/>',
-        f'<text x="21" y="16" class="tab">{html.escape(shorten(p["name"], 40))}</text>',
+        f'<text x="21" y="16" class="tab">{html.escape(shorten(p.get("tab", p["name"]), 48))}</text>',
         f'<circle cx="{CARD_W - 16}" cy="13" r="4" fill="{"#3fb950" if recent else "#565f89"}"'
         f'{" class=\"live\"" if recent else ""}/>',
         f'<line x1="0" y1="26" x2="{CARD_W}" y2="26" class="rule"/>',
@@ -262,7 +326,7 @@ def build_svg(projects, now=None):
 
 if __name__ == "__main__":
     os.makedirs("dist", exist_ok=True)
-    projects = [to_project(r) for r in pick_projects(fetch_repos())]
+    projects = [to_project(r) for r in pick_projects(all_repos())]
     with open("dist/projects.svg", "w", encoding="utf-8") as f:
         f.write(build_svg(projects))
     print(f"Wrote dist/projects.svg with {len(projects)} projects")
