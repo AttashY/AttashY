@@ -61,7 +61,6 @@
 <p align="center">
   <a href="https://github.com/AttashY"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/0-github.svg" alt="GitHub" /></a>
   <a href="https://www.linkedin.com/in/attash-yusofi/"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/1-linkedin.svg" alt="LinkedIn" /></a>
-  <a href="mailto:attashyusofi1@gmail.com"><img height="46" src="https://raw.githubusercontent.com/AttashY/AttashY/galaxy-output/links/2-email.svg" alt="Email" /></a>
 </p>
 <!-- LINKS:END -->
 
