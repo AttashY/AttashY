@@ -28,11 +28,11 @@ ART_COLS = 62                   # how wide the ASCII picture is, in characters
 RAMP = " .,:;-=+*#%$@"          # characters from darkest to brightest
 ART_COLOR = "#3fb950"
 WIDTH = 800
-INFO_W = 48                     # characters per line on the right side
+INFO_W = 55                     # characters per line on the right side
 # ------------------------------------------------
 
 ART_FS, ART_LH = 8.4, 9.6       # font size / line height of the picture
-INFO_FS, INFO_LH = 13, 19       # font size / line height of the facts
+INFO_FS, INFO_LH = 12, 18       # font size / line height of the facts
 PROMPT_FS = 13
 CHAR = 0.6                      # a monospace character is about 0.6 × its font size wide
 
