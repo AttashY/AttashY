@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="176" height="46" viewBox="0 0 176 46">
+<defs>
+  <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0.3" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95"/>
+    <stop offset="0.7" stop-color="#ffffff" stop-opacity="0"/>
+    <animateTransform attributeName="gradientTransform" type="rotate"
+      from="0 0.5 0.5" to="360 0.5 0.5" dur="4s" repeatCount="indefinite"/>
+  </linearGradient>
+</defs>
+<style>
+  text { font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; }
+  .name { font-size: 9px; font-weight: 700; fill: #a9a3ff; letter-spacing: 1px; }
+  .handle { font-size: 12px; font-weight: 700; fill: #ffffff; }
+  .letter { font-size: 13px; font-weight: 800; fill: #ffffff; }
+</style>
+<rect x="3" y="3" width="170" height="40" rx="20.0" fill="#0b0c1a" stroke="#5b63c9" stroke-width="1.5"/>
+<rect x="3" y="3" width="170" height="40" rx="20.0" fill="none" stroke="url(#shine)" stroke-width="1.8"/>
+<circle cx="26" cy="23.0" r="13" fill="#ffffff"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADCUlEQVR4nO2bO2zaUBSGf1dFCh1CqDOkyUBaS+mQSDgrQ+Is2RDZyJg1nRjYgaEbA1Mzhm4ZG7FFlWKpEksqxZWaoZVcCUWlSxAxi5EY3KEFEWyIr2M4+PFNGN9rn/P5Pi2ZMwwDQeYZdQDUhAKoA6Dm+bgTXL5WBJADEJtZNNNBA1ABUDHK6fvRkyYBXL62BEAGkJx6aLMhBqAA4ACAOHrSqgvk4J/kh0n+b9UPGCfAr5hysxLg9T4/CVNu4SzgtKIk8JCEZQCArN5BVluuBTVLmAVIAo/q4TYS8ejgvwI20GjrODq79pwIpi4gCTwuj1MPku+TiEdxeZyCJPCuBTcLmARUD7ddKTNP2BYgCbzlkx8lEY96qhUwCFi2fVGWstQEfhq0LUBW72xflKUsNQwCWmi09UfLNdq6p6ZCpi5wdHbtSpl5gkmArLawd1K3bAmNto69k7qnnj7gYCUoqy2sv/8c3KVwH1lteTbpYRwLmDb9xZQkLENparjXewAApdkZ/HYDZgFGOT3xPJev2S5fuviJ4sWPwbEk8MjtvEFmc2XiPRptHdWrW1S+/HqyjLloAesvX6CaFbFrcwmdiEdR2N9Abuc1cuc3qF7dOr43uQBxdRHyuxRiCxHmurGFCE6z/95zOpVAuhQW15wnP8xpVnS8ASMVkNlceXLyfYr7bx3V881maFfgIa4uMtfzjQAAONh6xVyHfBAcRev2oPzuDI6XohEkbT5ZJ+PA3AjQur2xU5ok8Khkth4VIa55tAto3R6kD/WxU5mstmztMp0MqHMhIHd+A6XZmVhGaXbw8avzBc84yAX0l7V2GB4b3IJcwKfvf2yXVZqa6/cnF0C9pSYX4ObW1gnkAliYRmshFxD4LkBNKIA6AGpCAdQBUBMKoA6AmlAAdQDUhAKoA6CGG/1miMvXfP0RkVFOc8PHgW8BoQDqAKixEuD+i7f5wZSblYDKDAKhwpSbaRYAAC5fU+C/74a+GeW0rY+mAEACUII/uoMGoGSVPDCmBQSJcBagDoCawAv4CyJz5Ou100U7AAAAAElFTkSuQmCC" x="17" y="14.0" width="18" height="18"/>
+<text x="48" y="20.0" class="name">LinkedIn</text>
+<text x="48" y="34.0" class="handle">@attash-yusofi</text>
+</svg>

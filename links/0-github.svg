@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="46" viewBox="0 0 132 46">
+<defs>
+  <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0.3" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95"/>
+    <stop offset="0.7" stop-color="#ffffff" stop-opacity="0"/>
+    <animateTransform attributeName="gradientTransform" type="rotate"
+      from="0 0.5 0.5" to="360 0.5 0.5" dur="4s" repeatCount="indefinite"/>
+  </linearGradient>
+</defs>
+<style>
+  text { font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; }
+  .name { font-size: 9px; font-weight: 700; fill: #a9a3ff; letter-spacing: 1px; }
+  .handle { font-size: 12px; font-weight: 700; fill: #ffffff; }
+  .letter { font-size: 13px; font-weight: 800; fill: #ffffff; }
+</style>
+<rect x="3" y="3" width="126" height="40" rx="20.0" fill="#0b0c1a" stroke="#5b63c9" stroke-width="1.5"/>
+<rect x="3" y="3" width="126" height="40" rx="20.0" fill="none" stroke="url(#shine)" stroke-width="1.8"/>
+<circle cx="26" cy="23.0" r="13" fill="#ffffff"/><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAb1BMVEX///8kKS74+PgsMTY+Q0f8/Pzw8PGRk5ZNUVXr6+xDSEzCxMUpLjLV1tYuMzc/Q0i3ubuUl5lbX2NTV1uLjpFKTlKxs7Xh4uOFh4rn5+h3en1vcnZ9gIPc3d6/wcJzd3o3PECmqKpjZ2rOz9CfoaRP5W5KAAABU0lEQVQ4jW1T7aKCIAzdEEUTSUuzLMtuvf8zXtiQVDx/lJ3DvgEIEPU9l1rL/F4LiFEMCQYkj2JDC6VxhaRJl3x2xgin7MePMuYRD7cQftrjrcL7ELk9nNt8yXXtyRm5mquzXADKA6LpzgZRlgBPZ1WO7yn/yrmqyGdGn95Zjav2hbNghZHMV3uNG3DZCigEmhRq+pmyrUAcifj4CO+49xciWqAe6p3pCJrNH1ATp5gH6KghQLrDnoB8GxaYPYFkhpONipjrl+wI61hQ8tB5EvYb4eTL5Ebhd8u/2f4EYfhvvWJpw9ZJ0LQfb5uxbMKi3pp5xVp30miexZHbRriHvUnojrKt7isXqWRBFQQNF2w3aYCPUl8/EREWzxtuE+pVI/wbkSGp0a51Nyg1F+L5/nel56xXgt+zcMgeC0FK27gdTzVoPXtI9DBuO2tRhJj94m3/A1GiDZXoM3d5AAAAAElFTkSuQmCC" x="17" y="14.0" width="18" height="18"/>
+<text x="48" y="20.0" class="name">GitHub</text>
+<text x="48" y="34.0" class="handle">@AttashY</text>
+</svg>
