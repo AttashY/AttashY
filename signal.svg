@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="180" viewBox="0 0 400 180">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0b1226"/><stop offset="1" stop-color="#060a16"/>
+  </linearGradient>
+  <clipPath id="frame"><rect width="400" height="180" rx="14"/></clipPath>
+  <path id="orbit" d="M 300 52 C 340 40, 380 60, 350 80 C 320 100, 270 70, 300 52 Z"/>
+</defs>
+<style>
+  text { font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; }
+  .title { font-size: 18px; font-weight: 800; fill: #ffffff; }
+  .sub { font-size: 9px; font-weight: 600; fill: #8a93b8; letter-spacing: 0.6px; }
+  .label { font-size: 8.5px; font-weight: 700; fill: #c0caf5; letter-spacing: 0.2px; }
+  .value { font-size: 20px; font-weight: 800; }
+  .tile { fill: #070b18; fill-opacity: 0.75; stroke: #2f3a6b; }
+  .panel { fill: #070b18; fill-opacity: 0.55; stroke: #2f3a6b; }
+  .track { fill: #22283d; }
+</style>
+<g clip-path="url(#frame)">
+<rect width="400" height="180" fill="url(#bg)"/>
+<radialGradient id="glow0"><stop offset="0" stop-color="#4a5cff" stop-opacity="0.32"/><stop offset="1" stop-color="#4a5cff" stop-opacity="0"/></radialGradient>
+<g><animateTransform attributeName="transform" type="translate" values="0 0; 60 30; 20 -20; 0 0" dur="22s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1"/><ellipse cx="75.0" cy="40" rx="108.0" ry="110.0" fill="url(#glow0)"/></g>
+<radialGradient id="glow1"><stop offset="0" stop-color="#8a3ffc" stop-opacity="0.32"/><stop offset="1" stop-color="#8a3ffc" stop-opacity="0"/></radialGradient>
+<g><animateTransform attributeName="transform" type="translate" values="0 0; -70 20; -20 40; 0 0" dur="26s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1"/><ellipse cx="310.0" cy="70" rx="126.0" ry="130.0" fill="url(#glow1)"/></g>
+<radialGradient id="glow2"><stop offset="0" stop-color="#14b8a6" stop-opacity="0.32"/><stop offset="1" stop-color="#14b8a6" stop-opacity="0"/></radialGradient>
+<g><animateTransform attributeName="transform" type="translate" values="0 0; 80 -20; -60 -10; 0 0" dur="30s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1"/><ellipse cx="190.0" cy="150" rx="132.0" ry="100.0" fill="url(#glow2)"/></g>
+<radialGradient id="glow3"><stop offset="0" stop-color="#e5484d" stop-opacity="0.32"/><stop offset="1" stop-color="#e5484d" stop-opacity="0"/></radialGradient>
+<g><animateTransform attributeName="transform" type="translate" values="0 0; -40 -30; 10 -10; 0 0" dur="24s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1"/><ellipse cx="360.0" cy="130" rx="96.0" ry="110.0" fill="url(#glow3)"/></g>
+</g>
+<rect x="0.5" y="0.5" width="399" height="179" rx="14" fill="none" stroke="#2a3566"/>
+<rect x="12" y="12" width="376" height="156" rx="11" class="panel"/>
+<text x="26" y="42" class="title">Profile Signal</text>
+<text x="27" y="58" class="sub">Live GitHub stats · updated daily</text>
+<circle r="2" fill="#7aa2f7"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#orbit"/></animateMotion><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+<rect x="24.0" y="72" width="82.0" height="84" rx="9" class="tile"/>
+<text x="34.0" y="92" class="label">Stars</text>
+<text x="34.0" y="122" class="value" fill="#4aa3ff">1</text>
+<rect x="34.0" y="138" width="62.0" height="5" rx="2.5" class="track"/>
+<rect x="34.0" y="138" width="5.0" height="5" rx="2.5" fill="#4aa3ff"><animate attributeName="width" from="0" to="5.0" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.8 0.2 1"/></rect>
+<rect x="114.0" y="72" width="82.0" height="84" rx="9" class="tile"/>
+<text x="124.0" y="92" class="label">Contributions</text>
+<text x="124.0" y="122" class="value" fill="#22d3ee">94</text>
+<rect x="124.0" y="138" width="62.0" height="5" rx="2.5" class="track"/>
+<rect x="124.0" y="138" width="62.0" height="5" rx="2.5" fill="#22d3ee"><animate attributeName="width" from="0" to="62.0" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.8 0.2 1"/></rect>
+<rect x="204.0" y="72" width="82.0" height="84" rx="9" class="tile"/>
+<text x="214.0" y="92" class="label">Repos</text>
+<text x="214.0" y="122" class="value" fill="#b77bff">2</text>
+<rect x="214.0" y="138" width="62.0" height="5" rx="2.5" class="track"/>
+<rect x="214.0" y="138" width="5.0" height="5" rx="2.5" fill="#b77bff"><animate attributeName="width" from="0" to="5.0" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.8 0.2 1"/></rect>
+<rect x="294.0" y="72" width="82.0" height="84" rx="9" class="tile"/>
+<text x="304.0" y="92" class="label">Followers</text>
+<text x="304.0" y="122" class="value" fill="#4ade80">0</text>
+<rect x="304.0" y="138" width="62.0" height="5" rx="2.5" class="track"/>
+<rect x="304.0" y="138" width="5.0" height="5" rx="2.5" fill="#4ade80"><animate attributeName="width" from="0" to="5.0" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.8 0.2 1"/></rect>
+</svg>
