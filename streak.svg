@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="180" viewBox="0 0 400 180">
+<style>
+  text { font-family: 'Segoe UI', Ubuntu, Helvetica, Arial, sans-serif; text-anchor: middle; }
+  .big { font-size: 24px; font-weight: 700; fill: #e0a3ff; }
+  .label { font-size: 12px; fill: #e0a3ff; }
+  .dates { font-size: 10.5px; fill: #a8f0ff; }
+  .fire { font-size: 24px; font-weight: 700; fill: #fff176; }
+  .firelabel { font-size: 12px; font-weight: 700; fill: #fff176; }
+  @keyframes flicker { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12, 0.92); } }
+  .flame { transform-origin: 200.0px 48px; animation: flicker 1.2s ease-in-out infinite; }
+</style>
+<rect x="0.5" y="0.5" width="399" height="179" rx="14" fill="#001a2e" stroke="#0e2a44"/>
+<line x1="133" y1="36" x2="133" y2="144" stroke="#8b9bb4" stroke-width="1.5"/>
+<line x1="267" y1="36" x2="267" y2="144" stroke="#8b9bb4" stroke-width="1.5"/>
+<text x="67" y="88" class="big">95</text>
+<text x="67" y="114" class="label">Total Contributions</text>
+<text x="67" y="138" class="dates">May 17, 2024 - Present</text>
+<circle cx="200.0" cy="74" r="32" fill="none" stroke="#e0a3ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="171.1 201.1" transform="rotate(-63.1 200.0 74)"><animate attributeName="stroke-dashoffset" from="171.1" to="0" dur="1.2s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.8 0.2 1"/></circle>
+<g class="flame"><path fill="#e0a3ff" fill-rule="evenodd" d="M 200.0 33 C 209.0 41, 209.0 51, 200.0 53 C 191.0 51, 191.0 43, 196.0 38 C 197.0 42, 199.0 43, 200.0 42 C 202.0 39, 201.0 36, 200.0 33 Z M 200.0 44 C 203.0 46, 203.0 50, 200.0 50 C 197.0 50, 197.0 47, 200.0 44 Z"/></g>
+<text x="200.0" y="83" class="fire">0</text>
+<text x="200.0" y="128" class="firelabel">Current Streak</text>
+<text x="200.0" y="150" class="dates">No streak yet</text>
+<text x="333" y="88" class="big">2</text>
+<text x="333" y="114" class="label">Longest Streak</text>
+<text x="333" y="138" class="dates">Nov 7 - Nov 8</text>
+</svg>
